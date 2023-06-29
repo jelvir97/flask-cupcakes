@@ -19,6 +19,10 @@ connect_db(app)
 def get_all_cupcakes():
     cupcakes = Cupcake.query.all()
     data = [c.serialize() for c in cupcakes]
-    print('***************')
     return jsonify(data=data)
+
+@app.route('/api/cupcakes/<id>')
+def get_cupcake_by_id(id):
+    cupcake =Cupcake.query.get_or_404(int(id))
+    return jsonify(data=cupcake.serialize())
 
