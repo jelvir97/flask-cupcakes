@@ -1,7 +1,7 @@
 """Flask app for Cupcakes"""
-from flask import Flask, requests, render_template,redirect
+from flask import Flask, request, render_template,redirect
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db
+from models import db, connect_db, Cupcake
 
 app= Flask(__name__)
 
