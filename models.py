@@ -26,3 +26,10 @@ class Cupcake(db.Model):
     image = db.Column(db.Text,
                       nullable =False,
                       default='https://thestayathomechef.com/wp-content/uploads/2017/12/Most-Amazing-Chocolate-Cupcakes-1-small.jpg')
+    
+    def serialize(self):
+        return {'id':self.id,
+                'flavor':self.flavor,
+                'size':self.size,
+                'rating':self.rating, 
+                'image':self.image}
