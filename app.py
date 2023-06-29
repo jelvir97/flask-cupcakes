@@ -19,10 +19,17 @@ connect_db(app)
 def get_all_cupcakes():
     cupcakes = Cupcake.query.all()
     data = [c.serialize() for c in cupcakes]
-    return jsonify(data=data)
+    return jsonify(cupcakes=data)
 
 @app.route('/api/cupcakes/<id>')
 def get_cupcake_by_id(id):
     cupcake =Cupcake.query.get_or_404(int(id))
-    return jsonify(data=cupcake.serialize())
+    return jsonify(cupcake=cupcake.serialize())
 
+@app.route('/api/cupcakes', methods=["POST"])
+def create_new_cupcake():
+    resp = request.json
+    cupcake = Cupcake(flavor=resp['flavor'],image=resp['image'],rating=resp['rating'],size=resp['size'])
+    db.session.add(cupcake)
+    db.session.commit()
+    return (jsonify(cupcake = cupcake.serialize()),201)
