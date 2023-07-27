@@ -15,6 +15,10 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.app_context().push()
 connect_db(app)
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route('/api/cupcakes')
 def get_all_cupcakes():
     cupcakes = Cupcake.query.all()
